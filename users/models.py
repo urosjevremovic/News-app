@@ -9,6 +9,6 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
-    def get_absolute_url(self):
-        return reverse('user_detail', args=[self.pk])
+    # def get_absolute_url(self):
+    #     return reverse('user_detail', args=[self.pk])
 
