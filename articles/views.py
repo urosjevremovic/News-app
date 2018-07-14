@@ -1,10 +1,11 @@
+import re
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseForbidden
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
 from django.core.exceptions import PermissionDenied
 
-from articles.models import Article
+from articles.models import Article, Comment
 
 
 class ArticleList(ListView):
@@ -65,3 +66,16 @@ class ArticleDelete(DeleteView, LoginRequiredMixin):
             return super().dispatch(request, *args, **kwargs)
         except Article.DoesNotExist:
             raise PermissionDenied
+
+
+class CommentCreate(CreateView, LoginRequiredMixin):
+    model = Comment
+    template_name = 'comment_new.html'
+    fields = ['comment']
+    login_url = 'login'
+
+    def form_valid(self, form):
+        article = re.split('/', str(self.request))[2]
+        form.instance.author = self.request.user
+        form.instance.article = Article.objects.get(pk=article)
+        return super().form_valid(form)

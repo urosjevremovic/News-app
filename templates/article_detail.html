@@ -9,6 +9,8 @@
     </div>
     <p>
         <a href="{% url 'article_edit' article.pk %}">Edit</a> | <a href="{% url 'article_delete' article.pk %}">Delete</a>
+        </br>
+        <a href="{% url 'comment_new' article.pk %}">Add comment</a>
     </p>
     <p>Back to <a href="{% url 'article_list' %}">All Articles</a>.</p>
 {% endblock content %}

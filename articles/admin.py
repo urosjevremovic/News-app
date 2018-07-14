@@ -1,5 +1,15 @@
 from django.contrib import admin
 
-from articles.models import Article
+from articles.models import Article, Comment
 
-admin.site.register(Article)
+
+class CommentInline(admin.TabularInline):
+    model = Comment
+
+
+class ArticleAdmin(admin.ModelAdmin):
+    inlines = [CommentInline, ]
+
+
+admin.site.register(Article, ArticleAdmin)
+admin.site.register(Comment)
