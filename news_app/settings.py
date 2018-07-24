@@ -129,6 +129,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+LOGIN_URL = 'http://127.0.0.1:8000/users/login/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap'
 
@@ -136,6 +137,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'Uros91'
-EMAIL_HOST_PASSWORD = os.environ.get('send_grip_password')
+EMAIL_HOST_PASSWORD = 'radekoncar991'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True

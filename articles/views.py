@@ -75,7 +75,8 @@ class CommentCreate(CreateView, LoginRequiredMixin):
     login_url = 'login'
 
     def form_valid(self, form):
-        article = re.split('/', str(self.request))[2]
         form.instance.author = self.request.user
-        form.instance.article = Article.objects.get(pk=article)
+        form.instance.article = Article.objects.get(pk=self.kwargs['pk'])
         return super().form_valid(form)
+
+
